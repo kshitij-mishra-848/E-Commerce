@@ -1,0 +1,2 @@
+This is a placeholder file to ensure the images directory exists.
+Please add actual product images here for a better user experience. 

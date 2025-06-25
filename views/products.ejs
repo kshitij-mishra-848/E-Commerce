@@ -1,0 +1,83 @@
+<!-- Products Page -->
+<section class="products-page">
+  <div class="container">
+    <h1 class="section-title">
+      <% if (searchQuery) { %>
+        Search Results for "<%= searchQuery %>"
+      <% } else if (category === 'men') { %>
+        Men's Clothing
+      <% } else if (category === 'women') { %>
+        Women's Clothing
+      <% } else { %>
+        All Products
+      <% } %>
+    </h1>
+    
+    <% if (!searchQuery) { %>
+      <div class="category-filter">
+        <a href="/products" class="<%= !category ? 'active' : '' %>">All</a>
+        <a href="/products?category=men" class="<%= category === 'men' ? 'active' : '' %>">Men</a>
+        <a href="/products?category=women" class="<%= category === 'women' ? 'active' : '' %>">Women</a>
+      </div>
+    <% } %>
+    
+    <% if (products.length === 0) { %>
+      <div class="no-products">
+        <% if (searchQuery) { %>
+          <p>No products found matching "<%= searchQuery %>"</p>
+          <a href="/products" class="btn btn-primary">View All Products</a>
+        <% } else { %>
+          <p>No products found.</p>
+        <% } %>
+      </div>
+    <% } else { %>
+      <div class="products">
+        <% products.forEach(product => { %>
+          <div class="product-card">
+            <div class="product-img">
+              <img src="<%= product.image %>" alt="<%= product.name %>">
+            </div>
+            <div class="product-info">
+              <h3 class="product-title"><%= product.name %></h3>
+              <p class="product-price">$<%= product.price.toFixed(2) %></p>
+              <a href="/products/<%= product.id %>" class="btn btn-primary">View Details</a>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<style>
+  .category-filter {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+  
+  .category-filter a {
+    margin: 0 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  .category-filter a.active {
+    background-color: var(--primary-color);
+    color: #fff;
+  }
+  
+  .no-products {
+    text-align: center;
+    padding: 3rem;
+  }
+  
+  .no-products p {
+    margin-bottom: 1rem;
+  }
+  
+  .products-page {
+    padding: 4rem 0;
+  }
+</style> 

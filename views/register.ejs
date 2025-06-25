@@ -1,0 +1,119 @@
+<%- contentFor('body') %>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Create Account</h2>
+                    <% if (messages && messages.error) { %>
+                        <div class="alert alert-danger"><%= messages.error %></div>
+                    <% } %>
+                    <% if (messages && messages.success) { %>
+                        <div class="alert alert-success"><%= messages.success %></div>
+                    <% } %>
+                    <form action="/auth/register" method="POST" id="registerForm">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                            <div class="form-text">
+                                Password must be at least 8 characters long and include:
+                                <ul class="mb-0">
+                                    <li id="lengthCheck">At least 8 characters</li>
+                                    <li id="letterCheck">At least one letter</li>
+                                    <li id="numberCheck">At least one number</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+                            <label class="form-check-label" for="terms">I agree to the Terms and Conditions</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Register</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Already have an account? <a href="/auth/login">Login here</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- contentFor('styles') %>
+<style>
+.input-group .btn-outline-secondary {
+    border-color: #ced4da;
+}
+.input-group .btn-outline-secondary:hover {
+    background-color: #f8f9fa;
+}
+.form-text ul {
+    padding-left: 1.2rem;
+    margin-top: 0.5rem;
+}
+.form-text li {
+    color: #dc3545;
+}
+.form-text li.valid {
+    color: #198754;
+}
+</style>
+
+<%- contentFor('scripts') %>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('registerForm');
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+    const lengthCheck = document.getElementById('lengthCheck');
+    const letterCheck = document.getElementById('letterCheck');
+    const numberCheck = document.getElementById('numberCheck');
+
+    // Password validation
+    function validatePassword() {
+        const val = password.value;
+        const hasLength = val.length >= 8;
+        const hasLetter = /[a-zA-Z]/.test(val);
+        const hasNumber = /\d/.test(val);
+
+        lengthCheck.classList.toggle('valid', hasLength);
+        letterCheck.classList.toggle('valid', hasLetter);
+        numberCheck.classList.toggle('valid', hasNumber);
+
+        return hasLength && hasLetter && hasNumber;
+    }
+
+    if (password) {
+        password.addEventListener('input', validatePassword);
+    }
+
+    if (form) {
+        form.addEventListener('submit', function(e) {
+            if (!validatePassword()) {
+                e.preventDefault();
+                alert('Please ensure your password meets all requirements.');
+                return;
+            }
+
+            if (password.value !== confirmPassword.value) {
+                e.preventDefault();
+                alert('Passwords do not match!');
+                return;
+            }
+        });
+    }
+});
+</script> 

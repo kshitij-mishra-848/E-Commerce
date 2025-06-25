@@ -1,0 +1,68 @@
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>Discover Your Style</h1>
+    <p>Shop the latest trends in men's and women's fashion at unbeatable prices.</p>
+    <div>
+      <a href="/products?category=men" class="btn btn-primary">Shop Men</a>
+      <a href="/products?category=women" class="btn btn-secondary">Shop Women</a>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products -->
+<section class="featured">
+  <div class="container">
+    <h2 class="section-title">Featured Products</h2>
+    
+    <div class="products">
+      <% products.forEach(product => { %>
+        <div class="product-card">
+          <div class="product-img">
+            <img src="<%= product.image %>" alt="<%= product.name %>">
+          </div>
+          <div class="product-info">
+            <h3 class="product-title"><%= product.name %></h3>
+            <p class="product-price">$<%= product.price.toFixed(2) %></p>
+            <a href="/products/<%= product.id %>" class="btn btn-primary">View Details</a>
+          </div>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- Categories -->
+<section class="categories">
+  <div class="container">
+    <h2 class="section-title">Shop by Category</h2>
+    
+    <div class="category-container">
+      <a href="/products?category=men" class="category-card">
+        <div class="category-img">
+          <img src="https://images.pexels.com/photos/297933/pexels-photo-297933.jpeg" alt="Men's Clothing">
+        </div>
+        <h3 class="category-title">Men's Clothing</h3>
+      </a>
+      
+      <a href="/products?category=women" class="category-card">
+        <div class="category-img">
+          <img src="https://images.pexels.com/photos/994234/pexels-photo-994234.jpeg" alt="Women's Clothing">
+        </div>
+        <h3 class="category-title">Women's Clothing</h3>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter">
+  <div class="container text-center">
+    <h2>Join Our Newsletter</h2>
+    <p>Subscribe to receive updates on new arrivals and special offers.</p>
+    <form class="newsletter-form">
+      <input type="email" placeholder="Your email address" required>
+      <button type="submit" class="btn btn-primary">Subscribe</button>
+    </form>
+  </div>
+</section> 

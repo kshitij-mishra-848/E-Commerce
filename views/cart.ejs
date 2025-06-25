@@ -1,0 +1,30 @@
+<!-- Shopping Cart Page -->
+<section class="cart">
+  <div class="container cart-container">
+    <h1 class="section-title">Shopping Cart</h1>
+    
+    <div class="cart-content">
+      <div class="cart-items">
+        <!-- Cart items will be dynamically populated with JavaScript -->
+      </div>
+      
+      <div class="cart-summary">
+        <!-- Cart summary will be dynamically populated with JavaScript -->
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cart-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+  
+  @media (max-width: 768px) {
+    .cart-content {
+      grid-template-columns: 1fr;
+    }
+  }
+</style> 
